@@ -1,14 +1,13 @@
 from __future__ import print_function, division
 from future import standard_library
-standard_library.install_aliases()
 from builtins import range
 from builtins import object
 import os
 import pickle as pickle
-
 import numpy as np
-
 import optim
+
+standard_library.install_aliases()
 
 
 class Solver(object):
@@ -132,7 +131,6 @@ class Solver(object):
 
         self._reset()
 
-
     def _reset(self):
         """
         Set up some book-keeping variables for optimization. Don't call this
@@ -151,7 +149,6 @@ class Solver(object):
         for p in self.model.params:
             d = {k: v for k, v in self.optim_config.items()}
             self.optim_configs[p] = d
-
 
     def _step(self):
         """
@@ -177,7 +174,8 @@ class Solver(object):
             self.optim_configs[p] = next_config
 
     def _save_checkpoint(self):
-        if self.checkpoint_name is None: return
+        if self.checkpoint_name is None:
+            return
         checkpoint = {
           'model': self.model,
           'update_rule': self.update_rule,
